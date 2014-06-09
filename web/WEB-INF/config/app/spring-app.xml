@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+	default-lazy-init="true">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 多数据源配置 -->
+	<bean id="jotm" class="org.springframework.transaction.jta.JotmFactoryBean" />
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:/com/portal/datacenter/commdata/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/datacenter/docdata/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/datacenter/operatedata/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/doccenter/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/extrafunc/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/sysmgr/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/usermgr/entity/cfg/*.hbm.xml</value>
+				<value>classpath*:/com/portal/govcenter/entity/cfg/*.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+			hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+			hibernate.show_sql=false
+			hibernate.format_sql=false
+			hibernate.query.substitutions=true 1, false 0
+			hibernate.jdbc.batch_size=20
+			hibernate.cache.use_query_cache=true
+			</value>
+		</property>
+		<property name="cacheProvider">
+			<ref local="cacheProvider"/>
+		</property>
+		<property name="lobHandler">
+			<ref bean="lobHandler" />
+		</property>
+	</bean>
+
+	<bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
+
+	<bean id="cacheProvider" class="com.javapms.basic.hibernate3.SpringEhCacheProvider">
+		<property name="configLocation">
+			<value>classpath:ehcache-hibernate.xml</value>
+		</property>
+		<property name="diskStoreLocation">
+			<value>/WEB-INF/cache/hibernate</value>
+		</property>
+	</bean>
+	<!-- 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+</beans>

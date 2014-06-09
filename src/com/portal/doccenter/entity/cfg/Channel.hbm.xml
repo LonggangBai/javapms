@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="Channel" table="tq_channel" dynamic-update="true">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="channel_id"><generator class="identity"/></id>
+		<property name="name" column="channel_name" type="string" not-null="true" length="50"/>
+		<property name="path" column="channel_path" type="string" not-null="false" length="30"/>
+		<property name="number" column="chnl_number" type="string" not-null="false" length="100"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="alone" column="is_alone" type="java.lang.Boolean" not-null="true"/>
+		<property name="show" column="is_show" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="ext" class="ChannelExt" cascade="delete"/>
+		<one-to-one name="txt" class="ChannelTxt" cascade="delete"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<many-to-one name="parent" column="parent_id" class="Channel" not-null="false"></many-to-one>
+		<set name="tpls" table="tq_chnl_tpl_selection" cascade="delete">
+			<cache usage="read-write"/>
+			<key column="chnl_id"/>
+			<composite-element class="ChnlTplSelection">
+				<property name="tplDoc" column="tpl_doc" type="string" length="100" not-null="false"/>
+				<many-to-one name="model" column="model_id" class="Model" not-null="true"></many-to-one>
+			</composite-element>
+		</set>
+		<set name="child" inverse="true" cascade="delete" order-by="priority asc">
+			<cache usage="read-write"/>
+			<key column="parent_id"/>
+			<one-to-many class="Channel"/>
+		</set>
+		<set name="viewGroups" table="tq_chnl_group_view">
+			<cache usage="read-write"/>
+			<key column="channel_id"/>
+			<many-to-many column="group_id" class="com.portal.usermgr.entity.Group"/>
+		</set>
+		<set name="contriGroups" table="tq_chnl_group_contri">
+			<cache usage="read-write"/>
+			<key column="channel_id"/>
+			<many-to-many column="group_id" class="com.portal.usermgr.entity.Group"/>
+		</set>
+		<set name="departs" table="tq_depart_channel">
+			<cache usage="read-write"/>
+			<key column="channel_id"/>
+			<many-to-many column="depart_id" class="com.portal.usermgr.entity.Depart"/>
+		</set>
+	</class>
+</hibernate-mapping>

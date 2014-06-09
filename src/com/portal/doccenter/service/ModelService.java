@@ -1,0 +1,31 @@
+package com.portal.doccenter.service;
+
+import com.portal.doccenter.entity.Model;
+import java.util.List;
+
+public abstract interface ModelService
+{
+  public abstract List<Model> getList(boolean paramBoolean, String paramString1, String paramString2);
+  
+  public abstract Model getDefModel();
+  
+  public abstract Model findById(Integer paramInteger);
+  
+  public abstract Model save(Model paramModel);
+  
+  public abstract Model update(Model paramModel);
+  
+  public abstract Model deleteById(Integer paramInteger);
+  
+  public abstract Model[] deleteByIds(Integer[] paramArrayOfInteger);
+  
+  public abstract List<Model> getModelList(List<Integer> paramList);
+  
+  public abstract Model[] updatePriority(Integer[] paramArrayOfInteger1, Integer[] paramArrayOfInteger2, Boolean[] paramArrayOfBoolean, Integer paramInteger);
+}
+
+
+/* Location:           F:\jsp源码\门户管理系统\javapms-1.2-beta\ROOT\WEB-INF\classes\
+ * Qualified Name:     com.portal.doccenter.service.ModelService
+ * JD-Core Version:    0.7.0.1
+ */

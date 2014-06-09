@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="JobFairsExt"
+		table="TQ_JOB_FAIRS_EXT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="fairs_id">
+			<generator class="foreign"><param name="property">jobFairs</param></generator>
+		</id>
+		<property name="tplAddress" column="tpl_address" type="string" not-null="false" length="100"/>
+		<property name="introduction" column="introduction" type="string" not-null="true"/>
+		<property name="hostOrgan" column="host_organ" type="java.lang.String" not-null="true" length="50"/>
+		<property name="undertake" column="undertake" type="java.lang.String" not-null="false" length="50"/>
+		<property name="cityName" column="city_name" type="string" not-null="true" length="100"/>
+		<property name="place" column="place" type="string" not-null="true" length="100"/>
+		<property name="linkMan" column="link_man" type="java.lang.String" not-null="true" length="30"/>
+		<property name="linkTel" column="link_tel" type="java.lang.String" not-null="true" length="20"/>
+		<property name="email" column="email" type="java.lang.String" not-null="true" length="30"/>
+		<one-to-one name="jobFairs" class="JobFairs" constrained="true"/>
+	</class>	
+</hibernate-mapping>

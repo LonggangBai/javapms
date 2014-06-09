@@ -1,0 +1,90 @@
+package #{action_p};
+
+import static com.javapms.basic.page.SimplePage.cpn;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import #{entity_p}.#{Entity};
+import com.portal.sysmgr.entity.Site;
+import #{manager_p}.#{Entity}Service;
+import com.javapms.basic.utils.ResponseUtils;
+import com.javapms.basic.page.Pagination;
+import com.portal.sysmgr.utils.ContextTools;
+
+@Controller
+public class #{Entity}Act {
+	private static final Logger log = LoggerFactory.getLogger(#{Entity}Act.class);
+
+    @RequiresPermissions("admin:#{config_entity}:list")
+	@RequestMapping("/#{config_entity}/v_list.do")
+	public String list() {
+		return "#{config_entity}/list";
+	}
+
+    @RequiresPermissions("admin:#{config_entity}:add")
+	@RequestMapping("/#{config_entity}/v_add.do")
+	public String add(ModelMap model) {
+		return "#{config_entity}/add";
+	}
+
+    @RequiresPermissions("admin:#{config_entity}:edit")
+	@RequestMapping("/#{config_entity}/v_edit.do")
+	public String edit(Integer id, HttpServletRequest request, ModelMap model) {
+		model.addAttribute("#{entity}", service.findById(id));
+		return "#{config_entity}/edit";
+	}
+
+    @RequiresPermissions("admin:#{config_entity}:edit")
+	@RequestMapping("/#{config_entity}/o_save.do")
+	public String save(#{Entity} bean, HttpServletRequest request, ModelMap model) {
+		bean = service.save(bean);
+		log.info("save #{Entity} id={}", bean.getId());
+		return add(model);
+	}
+
+    @RequiresPermissions("admin:#{config_entity}:update")
+	@RequestMapping("/#{config_entity}/o_update.do")
+	public String update(#{Entity} bean, HttpServletRequest request,
+			ModelMap model) {
+		bean = service.update(bean);
+		log.info("update #{Entity} id={}.", bean.getId());
+		return edit(bean.getId(), request, model);
+	}
+	
+	@RequestMapping(value = "/#{config_entity}/jsonData.do")
+	public String dataPageByJosn(Integer page,
+			Integer pagesize, HttpServletRequest request,
+			HttpServletResponse response, ModelMap model) {
+		Site site = ContextTools.getSite(request);
+		Pagination pagi = service.getPage(page, pagesize);
+		model.addAttribute("pagi", pagi);
+		response.setHeader("Cache-Control", "no-cache");
+		response.setContentType("text/json;charset=UTF-8");
+		return "#{config_entity}/data";
+	}
+	
+	@RequiresPermissions("admin:#{config_entity}:delete")
+	@RequestMapping(value = "/#{config_entity}/o_ajax_delete.do")
+	public void delete#{Entity}(Integer[] ids, HttpServletRequest request,
+			HttpServletResponse response) throws JSONException {
+		JSONObject json = new JSONObject();
+		#{Entity}[] beans = service.deleteByIds(ids);
+		for (#{Entity} bean : beans) {
+			log.info("delete #{Entity} id={}", bean.getId());
+		}
+		json.put("success", true);
+		json.put("status", 1);
+		ResponseUtils.renderJson(response, json.toString());
+		return;
+	}
+	
+	@Autowired
+	private #{Entity}Service service;
+}

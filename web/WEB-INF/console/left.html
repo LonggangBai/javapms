@@ -1,0 +1,155 @@
+<@Perm perm="admin:workspace:mgr">
+<div title="帐户管理" class="l-scroll" id="workSpace-1">
+	<ul class="left_menu">
+    <@Perm perm="admin:workspace:info">
+    <li onclick="javascript:f_addTab('personInfo','个人资料','workSpace/v_info.do')"><h3>个人资料</h3></li>
+    </@Perm>
+    <@Perm perm="admin:workspace:passedit">
+    <li onclick="javascript:f_addTab('modPass','修改密码','workSpace/v_passwordEdit.do')"><h3>修改密码</h3></li>
+    </@Perm>
+    </ul>
+</div>
+</@Perm>
+
+<@Perm perm="admin:doc:list">
+<div title="文档管理" class="l-scroll" id="docCenter-1">
+    <ul id="artichnlTree" class="ztree" style="margin-top:3px;"></ul>
+</div>
+</@Perm>
+<@Perm perm="admin:channel:list">
+<div title="栏目管理" class="l-scroll" id="docCenter-2">
+	<ul id="chnlTree" class="ztree" style="margin-top:3px;"></ul>
+</div>
+</@Perm>
+<@Perm perm="admin:docconfig">
+<div title="文档配置" class="l-scroll" id="docCenter-3">
+<ul class="left_menu">
+<@Perm perm="admin:model:list">
+<li onclick="javascript:f_addTab('modelMgr','模型管理','model/v_list.do')"><h3>模型管理</h3></li>
+</@Perm>
+<@Perm perm="admin:doctype:list">
+<li onclick="javascript:f_addTab('contentType','文档类型','type/v_list.do')"><h3>文档类型</h3></li>
+</@Perm>
+<@Perm perm="admin:workflow:list">
+<li onclick="javascript:f_addTab('workFlow','工作流列表','workflow/v_list.do')"><h3>工作流管理</h3></li>
+</@Perm>
+</ul>
+</div>
+</@Perm>
+<@Perm perm="admin:extrafunc">
+<div title="常用功能" class="l-scroll" id="component-1">
+<ul class="left_menu">
+<@Perm perm="admin:comment:list">
+<li onclick="javascript:f_addTab('commentMgr','评论管理','comment/v_list.do')"><h3>评论管理</h3></li>
+</@Perm>
+<@Perm perm="admin:board:list">
+<li id="board" class="hasChild"><h3 onclick="togul('board')">留言管理</h3>
+	<ul style="display:none">
+		<li onclick="javascript:f_addTab('boardMgr','留言列表','board/v_list.do')"><h3>留言列表</h3></li>
+		<@Perm perm="admin:messageType:list">
+		<li onclick="javascript:f_addTab('messageType','分类管理','messageType/v_list.do')"><h3>分类管理</h3></li>
+		</@Perm>
+	</ul>
+</li>
+</@Perm>
+<@Perm perm="admin:advert:list">
+<li id="advert" class="hasChild"><h3 onclick="togul('advert')">广告管理</h3>
+	<ul style="display:none">
+		<li onclick="javascript:f_addTab('advertMgr','广告列表','advert/v_list.do')"><h3>广告列表</h3></li>
+		<@Perm perm="admin:advertSlot:list">
+		<li onclick="javascript:f_addTab('workFlow','广告位管理','advertSlot/v_list.do')"><h3>广告位管理</h3></li>
+		</@Perm>
+	</ul>
+</li>
+</@Perm>
+<@Perm perm="admin:questionnaire:list">
+<li onclick="javascript:f_addTab('questionnaireMgr','问卷列表','questionnaire/v_list.do')"><h3>调查问卷管理</h3></li>
+</@Perm>
+<@Perm perm="admin:category:list">
+<li onclick="javascript:f_addTab('categoryMgr','论坛分类管理','category/v_list.do')"><h3>论坛分区管理</h3></li>
+</@Perm>
+<@Perm perm="admin:forum:list">
+<li onclick="javascript:f_addTab('forumMgr','版块管理','forum/v_list.do')"><h3>版块管理</h3></li>
+</@Perm>
+</ul>
+</div>
+</@Perm>
+<@Perm perm="admin:govcenter">
+<div title="政民互动" class="l-scroll" id="govcenter-1">
+<ul class="left_menu">
+<li id="mailbox" class="hasChild"><h3 onclick="togul('mailbox')">局长信箱</h3>
+	<ul style="display:none">
+		<li onclick="javascript:f_addTab('mailboxMgr','局长信箱列表','mailbox/v_list.do')"><h3>局长信箱</h3></li>
+		<li onclick="javascript:f_addTab('mailboxTypeMgr','局长信箱类型列表','mailboxType/v_list.do')"><h3>局长信箱类型</h3></li>
+	</ul>
+</li>
+</ul>
+</div>
+<div title="政务公开" class="l-scroll" id="govcenter-2">
+<ul class="left_menu">
+<li onclick="javascript:f_addTab('commentMgr','评论管理','comment/v_list.do')"><h3>依申请公开</h3></li>
+</ul>
+</div>
+<div title="网上办事" class="l-scroll" id="govcenter-3">
+<ul class="left_menu">
+<li onclick="javascript:f_addTab('commentMgr','评论管理','comment/v_list.do')"><h3>评论管理</h3></li>
+</ul>
+</div>
+</@Perm>
+<@Perm perm="admin:usermgr">
+<div title="用户管理" class="l-scroll" id="userMgr-1">
+<ul class="left_menu">
+<@Perm perm="admin:member:list">
+<li onclick="javascript:f_addTab('memberMgr','会员管理','member/v_list.do')"><h3>会员管理</h3></li>
+</@Perm>
+<@Perm perm="admin:group:list">
+<li onclick="javascript:f_addTab('mgroupMgr','会员组管理','group/v_list.do')"><h3>会员组管理</h3></li>
+</@Perm>
+<@Perm perm="admin:admin:list">
+<li onclick="javascript:f_addTab('adminList','管理员列表','admin/v_list.do')"><h3>管理员列表</h3></li>
+</@Perm>
+<@Perm perm="admin:role:list">
+<li onclick="javascript:f_addTab('roleMgr','角色管理','role/v_list.do')"><h3>角色管理</h3></li>
+</@Perm>
+<@Perm perm="admin:depart:list">
+<li onclick="javascript:f_addTab('departMgr','部门管理','depart/v_list.do')"><h3>部门管理</h3></li>
+</@Perm>
+</ul>
+</div>
+</@Perm>
+<@Perm perm="admin:datacenter">
+<div title="文档数据" class="l-scroll" id="dataCenter-1">
+<ul class="left_menu">
+<@Perm perm="admin:keyword:list">
+<li onclick="javascript:f_addTab('keywordMgr','关键词管理','keyword/v_list.do')"><h3>关键词管理</h3></li>
+</@Perm>
+<@Perm perm="admin:sensitivity:list">
+<li onclick="javascript:f_addTab('sensitivityMgr','敏感词管理','sensitivity/v_list.do')"><h3>敏感词管理</h3></li>
+</@Perm>
+<@Perm perm="admin:lucene:index">
+<li onclick="javascript:f_addTab('luceneMgr','全文检索','lucene/v_index.do')"><h3>全文检索</h3></li>
+</@Perm>
+</ul>
+</div>
+</@Perm>
+<@Perm perm="admin:sysmgr">
+<@Perm perm="admin:tpl:list">
+<div title="模板管理" class="l-scroll" id="sysMgr-1">
+    <ul id="tplTree" class="ztree" style="margin-top:3px;"></ul>
+</div>
+</@Perm>
+<@Perm perm="admin:res:list">
+<div title="资源管理" class="l-scroll" id="sysMgr-2">
+	<ul id="resTree" class="ztree" style="margin-top:3px;"></ul>
+</div>
+</@Perm>
+<@Perm perm="admin:sites:mgr">
+<div title="系统设置" class="l-scroll" id="sysMgr-3">
+<ul class="left_menu">
+<@Perm perm="admin:sites:sys_edit">
+<li onclick="javascript:f_addTab('sysConf','系统设置','site/v_sys_edit.do')"><h3>系统设置</h3></li>
+</@Perm>
+</ul>
+</div>
+</@Perm>
+</@Perm>

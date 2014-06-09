@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="JobIntent"
+		table="TQ_JOB_INTENT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="intent_id">
+			<generator class="identity"/>
+		</id>
+		<property name="workPlace" column="work_place" type="string" not-null="true" length="50"/>
+		<property name="wage" column="expect_wage" type="java.lang.Byte" not-null="true" length="50"/>
+		<property name="nature" column="work_nature" type="string" not-null="true" length="10"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="updateTime" column="update_time" type="timestamp" not-null="false" length="19"/>
+		<many-to-one name="metier" column="metier_id" class="com.portal.datacenter.commdata.entity.Metier" not-null="true"></many-to-one>
+		<many-to-one name="metier2" column="metier_id2" class="com.portal.datacenter.commdata.entity.Metier" not-null="true"></many-to-one>
+		<many-to-one name="industry" column="industry_id" class="com.portal.datacenter.commdata.entity.Industry" not-null="true"></many-to-one>
+		<one-to-one name="resume" class="Resume" constrained="true"/>
+	</class>
+</hibernate-mapping>

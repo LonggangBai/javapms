@@ -1,0 +1,12 @@
+{Rows:[
+   <#list list as channel>
+   {
+     "id":"${channel.id}",
+     "name":"${channel.name!?html}",
+     "path":"${channel.path!}",
+     "priority":"${channel.priority!}",
+     "show":"${channel.show?string('是','否')}"
+   }<#if channel_has_next>,</#if>
+   </#list>
+   ],Total:"${list?size!}"
+}

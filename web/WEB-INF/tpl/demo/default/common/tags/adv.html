@@ -1,0 +1,53 @@
+<script src="${comm}/js/advjquery.js"></script>
+[#if bean??]
+[#if bean.slot.slotType==1]
+<!-- 固定位置 -->
+<div style="width: ${bean.slot.width!}px; height: ${bean.slot.height!}px; color: #000" id="ad1">
+<a href="${bean.url!}" target="_blank">
+<img border="0" src="${base}${bean.attrUrl!}">
+</a>
+</div>
+[#elseif bean.slot.slotType==2]
+<!-- 漂浮广告 -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(function(){
+        $("body").floatAd({
+            imgSrc : '${base}${bean.attrUrl!}',
+            url:'${bean.url!}',
+            id : '${bean.id!}'
+        });
+    })
+});
+</script>
+[#elseif bean.slot.slotType==3]
+<!-- 弹窗广告 -->
+
+[#else]
+<!-- 对联广告 -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(function(){
+        $("body").floatAd({
+            imgSrc : '${base}${bean.attrUrl!}',
+            url:'${bean.url!}',
+            id : '${bean.id!}'
+        });
+    })
+});
+</script>
+[/#if]
+[#elseif list??&&list?size gt 0]
+[#assign adv=list[0]]
+<script type="text/javascript">
+$(document).ready(function(){
+    $(function(){
+        $("body").floatAd({
+            imgSrc : '${base}${adv.attrUrl!}',
+            url:'${adv.url!}',
+            id : '${adv.id!}'
+        });
+    })
+});
+</script>
+[/#if]

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Advert" table="tq_advert">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="advert_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="50"/>
+		<property name="advType" column="adv_type" type="string" not-null="true" length="20"/>
+		<property name="attrUrl" column="attr_url" type="string" not-null="false" length="80"/>
+		<property name="jsstring" column="jsstring" type="string" not-null="false" length="500"/>
+		<property name="url" column="url" type="string" not-null="true" length="100"/>
+		<property name="startTime" column="start_time" type="date" not-null="true" length="10"/>
+		<property name="endTime" column="end_time" type="date" not-null="false" length="10"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="weights" column="weights" type="integer" not-null="false" length="10"/>
+		<property name="clicks" column="clicks" type="integer" not-null="true" length="10"/>
+		<property name="showTimes" column="show_times" type="integer" not-null="false" length="10"/>
+		<property name="aexplain" column="aexplain" type="string" not-null="false" length="500"/>
+		<property name="enable" column="enable" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="slot" column="slot_id" class="AdvertSlot" not-null="true"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

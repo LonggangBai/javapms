@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.govcenter.entity">
+	<class name="MailboxExt" table="tq_mailbox_ext">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="mailbox_id">
+			<generator class="foreign"><param name="property">mailbox</param></generator>
+		</id>
+		<property name="content" column="content" type="string" not-null="true"/>
+		<property name="reply" column="reply" type="string" not-null="false"/>
+		<one-to-one name="mailbox" class="Mailbox" constrained="true"/>
+	</class>
+</hibernate-mapping>

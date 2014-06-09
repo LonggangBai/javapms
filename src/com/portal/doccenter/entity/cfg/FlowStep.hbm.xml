@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class
+		name="FlowStep"
+		table="tq_flow_step"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="step_id"><generator class="identity"/></id>
+		<property name="step" column="step" type="java.lang.Integer" not-null="true" length="10"/>
+		<many-to-one name="flow" column="flow_id" class="WorkFlow" not-null="true"></many-to-one>
+		<many-to-one name="role" column="role_id" class="com.portal.usermgr.entity.Role" not-null="true"></many-to-one>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="JobPost"
+		table="TQ_JOB_POST"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="job_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="jobName" column="job_name" type="java.lang.String" not-null="true" length="40"/>
+		<property name="workAddress" column="work_address" type="java.lang.String" not-null="true" length="100"/>
+		<property name="gender" column="gender" type="java.lang.Byte" not-null="true"/>
+		<property name="minAge" column="min_age" type="java.lang.Integer" not-null="false"/>
+		<property name="maxAge" column="max_age" type="java.lang.Integer" not-null="false"/>
+		<property name="educational" column="educational" type="java.lang.Byte" not-null="true"/>
+		<property name="recruitCount" column="recruit_count" type="java.lang.Integer" not-null="true" length="19"/>
+		<property name="startTime" column="start_time" type="date" not-null="true" length="19"/>
+		<property name="endTime" column="end_time" type="date" not-null="true" length="19"/>
+		<property name="refreshTime" column="refresh_time" type="timestamp" not-null="false" length="19"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="false" length="19"/>
+		<property name="check" column="is_check" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="ext" class="JobPostExt" cascade="delete"/>
+		<many-to-one name="metier" column="metier_id" class="com.portal.datacenter.commdata.entity.Metier" not-null="true"></many-to-one>
+		<many-to-one name="company" column="company_id" class="CompanyInfo" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

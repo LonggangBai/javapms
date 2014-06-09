@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ChannelTxt" table="tq_channel_txt">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="channel_id">
+			<generator class="foreign"><param name="property">channel</param></generator>
+		</id>
+		<property name="txtval" column="txt" type="org.springframework.orm.hibernate3.support.ClobStringType" not-null="false"/>
+		<one-to-one name="channel" class="Channel" constrained="true"/>
+	</class>
+</hibernate-mapping>

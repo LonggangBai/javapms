@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.datacenter.commdata.entity">
+	<class
+		name="ForeignLang"
+		table="TQ_FOREIGN_LANG"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="id"
+			type="integer"
+			column="lang_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property
+			name="code"
+			column="lang_code"
+			type="java.lang.String"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="name"
+			column="lang_name"
+			type="java.lang.String"
+			not-null="true"
+			length="50"
+		/>
+	</class>	
+</hibernate-mapping>

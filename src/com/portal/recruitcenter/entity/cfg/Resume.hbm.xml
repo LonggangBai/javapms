@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="Resume"
+		table="TQ_RESUME"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="resume_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="java.lang.String" not-null="true" length="30"/>
+		<property name="lang" column="resume_lang" type="string" not-null="true" length="20"/>
+		<property name="open" column="resume_open" type="java.lang.Byte" not-null="true" length="20"/>
+		<property name="applyDef" column="is_apply_def" type="java.lang.Boolean" not-null="true" length="20"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="updateTime" column="update_time" type="timestamp" not-null="false" length="19"/>
+		<one-to-one name="ext" class="ResumeExt" cascade="delete"/>
+		<one-to-one name="intent" class="JobIntent" cascade="delete"/>
+		<many-to-one name="personal" column="personal_id" class="PersonalInfo" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

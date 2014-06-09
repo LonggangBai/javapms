@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Theme" table="tq_theme">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="theme_id"><generator class="identity"/></id>
+		<property name="title" column="title" type="string" not-null="true" length="150"/>
+		<property name="viewsCount" column="views_count" type="integer" not-null="true" length="10"/>
+		<property name="replyCount" column="reply_count" type="integer" not-null="true" length="10"/>
+		<property name="lock" column="is_lock" type="java.lang.Boolean" not-null="true"/>
+		<property name="essena" column="is_essena" type="java.lang.Boolean" not-null="false"/>
+		<property name="bold" column="is_bold" type="java.lang.Boolean" not-null="false"/>
+		<property name="italic" column="is_italic" type="java.lang.Boolean" not-null="false"/>
+		<property name="color" column="color" type="string" not-null="false" length="50"/>
+		<property name="topTime" column="top_time" type="date" not-null="false" length="19"/>
+		<property name="essenaTime" column="essena_time" type="date" not-null="false" length="19"/>
+		<property name="lockTime" column="lock_time" type="date" not-null="false" length="19"/>
+		<property name="lightTime" column="light_time" type="date" not-null="false" length="19"/>
+		<property name="status" column="status" type="integer" not-null="true" length="10"/>
+		<property name="affix" column="is_affix" type="java.lang.Boolean" not-null="true"/>
+		<property name="img" column="is_img" type="java.lang.Boolean" not-null="true"/>
+		<property name="moderReply" column="is_moder_reply" type="java.lang.Boolean" not-null="true"/>
+		<property name="lastReplyTime" column="last_reply_time" type="timestamp" not-null="false" length="19"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<one-to-one name="txt" class="ThemeTxt" cascade="delete"/>
+		<many-to-one name="creater" column="creater_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<many-to-one name="forum" column="forum_id" class="Forum" not-null="true"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<many-to-one name="lastReplyer" column="last_replyer_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="ForumOperate" table="tq_forum_operate">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="operate_id"><generator class="identity"/></id>
+		<property name="target" column="operate_target" type="java.lang.Integer" not-null="true" length="10"/>
+		<property name="targetType" column="target_type" type="string" not-null="true" length="30"/>
+		<property name="name" column="name" type="string" not-null="true" length="30"/>
+		<property name="reason" column="reason" type="string" not-null="false" length="100"/>
+		<property name="operateTime" column="operate_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="admin" column="operate_admin" class="com.portal.usermgr.entity.User" not-null="true"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

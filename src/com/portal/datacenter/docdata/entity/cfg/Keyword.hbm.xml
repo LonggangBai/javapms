@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.datacenter.docdata.entity">
+	<class name="Keyword" table="tq_keyword">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="integer" column="keyword_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="100"/>
+		<property name="url" column="url" type="string" not-null="true" length="100"/>
+		<property name="bold" column="is_bold" type="java.lang.Boolean" not-null="true"/>
+		<property name="underline" column="is_underline" type="java.lang.Boolean" not-null="true"/>
+		<property name="enable" column="is_enable" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

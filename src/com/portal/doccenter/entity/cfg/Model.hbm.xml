@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="Model" table="tq_model">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="model_id"><generator class="identity"/></id>
+		<property name="name" column="model_name" type="string" not-null="true" length="100"/>
+		<property name="icon" column="model_icon" type="string" not-null="false" length="30"/>
+		<property name="tplDoc" column="model_tpl_doc" type="string" not-null="false" length="100"/>
+		<property name="tplPrint" column="model_tpl_print" type="string" not-null="false" length="100"/>
+		<property name="tplSearch" column="model_tpl_search" type="string" not-null="false" length="100"/>
+		<property name="tplAdvSearch" column="model_tpl_advsearch" type="string" not-null="false" length="100"/>
+		<property name="tplComment" column="model_tpl_comment" type="string" not-null="false" length="100"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="disabled" column="is_disabled" type="java.lang.Boolean" not-null="true"/>
+		<set name="fields" inverse="true" cascade="all-delete-orphan">
+			<key column="model_id"/>
+			<one-to-many class="ModelField"/>
+		</set>
+	</class>
+</hibernate-mapping>

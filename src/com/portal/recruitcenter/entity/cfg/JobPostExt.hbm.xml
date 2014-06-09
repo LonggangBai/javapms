@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="JobPostExt"
+		table="TQ_JOB_POST_EXT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="job_id">
+			<generator class="foreign"><param name="property">jobPost</param></generator>
+		</id>
+		<property name="jobType" column="job_type" type="java.lang.String" not-null="true" length="30"/>
+		<property name="wage" column="wage" type="java.lang.Byte" not-null="true"/>
+		<property name="workExp" column="work_exp" type="java.lang.Byte" not-null="true"/>
+		<property name="appeal" column="appeal" type="java.lang.String" not-null="true"/>
+		<property name="jobNature" column="job_nature" type="java.lang.String" not-null="false"/>
+		<property name="others" column="others" type="java.lang.String" not-null="false"/>
+		<property name="onbusiness" column="is_onbusiness" type="java.lang.Byte" not-null="true"/>
+		<one-to-one name="jobPost" class="JobPost" constrained="true"/>
+	</class>
+</hibernate-mapping>

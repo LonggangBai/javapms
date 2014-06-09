@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ArticleType" table="tq_article_type">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="type_id"><generator class="identity"/></id>
+		<property name="name" column="type_name" type="string" not-null="true" length="20"/>
+		<property name="hasImage" column="has_image" type="java.lang.Boolean" not-null="true"/>
+		<property name="disabled" column="is_disabled" type="java.lang.Boolean" not-null="true"/>
+	</class>
+</hibernate-mapping>

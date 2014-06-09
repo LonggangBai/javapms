@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="ThemeTxt" table="tq_theme_txt">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="theme_id">
+			<generator class="foreign"><param name="property">theme</param></generator>
+		</id>
+		<property name="content" column="content" type="org.springframework.orm.hibernate3.support.ClobStringType" not-null="false"/>
+		<one-to-one name="theme" class="Theme" constrained="true"/>
+	</class>
+</hibernate-mapping>

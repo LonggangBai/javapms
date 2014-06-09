@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="VipType"
+		table="TQ_VIP_TYPE"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="type_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="typeName" column="type_name" type="java.lang.String" not-null="true" length="50"/>
+		<property name="dayCount" column="day_count" type="java.lang.Integer" not-null="true"/>
+		<property name="postCount" column="post_count" type="java.lang.Integer" not-null="true"/>
+		<property name="favoriteCount" column="favorite_count" type="java.lang.Integer" not-null="true"/>
+		<property name="auditionCount" column="audition_count" type="java.lang.Integer" not-null="true"/>
+		<property name="receiptCount" column="receipt_count" type="java.lang.Integer" not-null="true"/>
+		<property name="sendCount" column="send_count" type="java.lang.Integer" not-null="true"/>
+		<property name="setupLogin" column="setup_login" type="java.lang.Boolean" not-null="true"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="PostsExt" table="tq_posts_ext">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="posts_id">
+			<generator class="foreign"><param name="property">posts</param></generator>
+		</id>
+		<property name="createIp" column="create_ip" type="string" not-null="true" length="20"/>
+		<property name="editTime" column="edit_time" type="timestamp" not-null="false" length="19"/>
+		<property name="editIp" column="edit_ip" type="string" not-null="false" length="20"/>
+		<property name="editCount" column="edit_count" type="integer" not-null="true" length="10"/>
+		<many-to-one name="editer" column="editer_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<one-to-one name="posts" class="Posts" constrained="true"/>
+	</class>
+</hibernate-mapping>

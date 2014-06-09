@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ModelField" table="tq_model_field">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="field_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="50"/>
+		<property name="label" column="label" type="string" not-null="true" length="100"/>
+		<property name="priority" column="priority" type="integer" not-null="false" length="10"/>
+		<property name="size" column="text_size" type="string" not-null="false" length="20"/>
+		<property name="maxlength" column="text_maxlength" type="string" not-null="false" length="10"/>
+		<property name="width" column="width" type="string" not-null="false" length="10"/>
+		<property name="height" column="height" type="string" not-null="false" length="3"/>
+		<property name="tip" column="tip" type="string" not-null="false" length="255"/>
+		<property name="valueList" column="value_list" type="string" not-null="false" length="255"/>
+		<property name="dataType" column="data_type" type="integer" not-null="true" length="10"/>
+		<property name="required" column="is_required" type="java.lang.Boolean" not-null="true"/>
+		<property name="single" column="is_single" type="java.lang.Boolean" not-null="true"/>
+		<property name="economy" column="is_economy" type="java.lang.Boolean" not-null="true"/>
+		<property name="show" column="is_show" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="model" column="model_id" class="Model" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

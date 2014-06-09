@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="PersonalFavorite"
+		table="tq_personal_favorite"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="favorite_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="personal" column="personal_id" class="PersonalInfo" not-null="true"></many-to-one>
+		<many-to-one name="job" column="job_id" class="JobPost" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

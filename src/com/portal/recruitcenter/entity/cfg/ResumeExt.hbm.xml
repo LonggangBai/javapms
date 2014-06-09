@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="ResumeExt"
+		table="TQ_RESUME_EXT"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="resume_id">
+			<generator class="foreign"><param name="property">resume</param></generator>
+		</id>
+		<property name="evaluate" column="evaluate" type="java.lang.String" not-null="false"/>
+		<property name="skillSpecial" column="skill_special" type="java.lang.String" not-null="false"/>
+		<property name="workExp" column="work_exp" type="java.lang.String" not-null="false"/>
+		<one-to-one name="resume" class="Resume" constrained="true"/>
+	</class>
+</hibernate-mapping>

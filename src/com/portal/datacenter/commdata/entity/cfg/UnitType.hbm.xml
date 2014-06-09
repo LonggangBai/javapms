@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.datacenter.commdata.entity">
+	<class
+		name="UnitType"
+		table="TQ_UNIT_TYPE"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id
+			name="id"
+			type="integer"
+			column="type_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property
+			name="code"
+			column="type_code"
+			type="java.lang.String"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="name"
+			column="type_name"
+			type="java.lang.String"
+			not-null="true"
+			length="50"
+		/>
+	</class>	
+</hibernate-mapping>

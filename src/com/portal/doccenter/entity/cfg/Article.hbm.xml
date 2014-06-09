@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="Article" table="tq_article">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="article_id"><generator class="identity"/></id>
+		<property name="title" column="title" type="string" not-null="true" length="100"/>
+		<property name="shortTitle" column="short_title" type="string" not-null="false" length="50"/>
+		<property name="releaseDate" column="release_date" type="timestamp" not-null="false" length="19"/>
+		<property name="titleColor" column="title_color" type="string" not-null="false" length="10" />
+		<property name="bold" column="is_bold" type="java.lang.Boolean" not-null="false"/>
+		<property name="top" column="is_top" type="java.lang.Boolean" not-null="false"/>
+		<property name="recommend" column="is_recommend" type="java.lang.Boolean" not-null="false"/>
+		<property name="status" column="status" type="java.lang.Byte" not-null="false" length="5"/>
+		<property name="step" column="step" type="java.lang.Integer" not-null="false" length="10"/>
+		<property name="style" column="style" type="java.lang.String" not-null="false" length="20"/>
+		<one-to-one name="articleExt" class="ArticleExt" cascade="delete"/>
+		<one-to-one name="articleTxt" class="ArticleTxt" cascade="delete"/>
+		<one-to-one name="docStatis" class="DocStatis" cascade="delete"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<many-to-one name="model" column="model_id" class="Model" not-null="true"></many-to-one>
+		<many-to-one name="user" column="user_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<many-to-one name="inputDepart" column="depart_id" class="com.portal.usermgr.entity.Depart" not-null="false"></many-to-one>
+		<many-to-one name="checkUser" column="check_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<many-to-one name="channel" column="channel_id" class="Channel" not-null="false"></many-to-one>
+		<set name="channels" table="tq_article_channel">
+			<key column="article_id"/>
+			<many-to-many column="channel_id" class="Channel"/>
+		</set>
+		<set name="viewGroups" table="tq_article_group_view">
+			<cache usage="read-write"/>
+			<key column="article_id"/>
+			<many-to-many column="group_id" class="com.portal.usermgr.entity.Group"/>
+		</set>
+		<list name="pics" table="tq_article_picture" cascade="delete">
+			<cache usage="read-write"/>
+			<key column="article_id"/>
+			<list-index column="priority"/>
+			<composite-element class="ArticlePicture">
+				<property name="imgPath" column="img_path" type="string" length="100" not-null="true"/>
+				<property name="description" column="description" type="string" length="255" not-null="false"/>
+				<property name="thumb" column="is_thumb" type="java.lang.Boolean" not-null="false"/>
+				<property name="style" column="style" type="string" length="50" not-null="false"/>
+			</composite-element>
+		</list>
+		<list name="atts" table="tq_article_attachment" cascade="delete">
+			<cache usage="read-write"/>
+			<key column="article_id"/>
+			<list-index column="priority"/>
+			<composite-element class="ArticleAttachment">
+				<property name="path" column="att_path" type="string" length="255" not-null="true"/>
+				<property name="name" column="att_name" type="string" length="100" not-null="true"/>
+				<property name="count" column="download_count" type="java.lang.Integer" length="10" not-null="true"/>
+			</composite-element>
+		</list>
+		<map name="attr" table="tq_article_attr" cascade="all-delete-orphan">
+			<cache usage="read-write"/>
+			<key column="article_id" not-null="true"/>
+			<map-key column="attr_name" type="string" length="30"/>
+			<element column="attr_value" type="string" length="255"/>
+		</map>
+	</class>
+</hibernate-mapping>

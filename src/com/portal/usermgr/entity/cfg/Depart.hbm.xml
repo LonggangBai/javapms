@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.usermgr.entity">
+	<class
+		name="Depart"
+		table="tq_depart"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="depart_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="50"/>
+		<property name="number" column="number" type="string" not-null="false" length="150"/>
+		<property name="visitPath" column="visit_path" type="string" not-null="false" length="30"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="show" column="is_show" type="java.lang.Boolean" not-null="true"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="parent" column="parent_id" class="Depart" not-null="false"></many-to-one>
+		<many-to-one name="flow" column="flow_id" class="com.portal.doccenter.entity.WorkFlow" not-null="false"></many-to-one>
+        <many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="false"></many-to-one>
+        <set name="channels" table="tq_depart_channel" inverse="true">
+			<cache usage="read-write"/>
+			<key column="depart_id"/>
+			<many-to-many column="channel_id" class="com.portal.doccenter.entity.Channel"/>
+		</set>
+		<set name="child" inverse="true" cascade="delete" order-by="priority asc">
+			<cache usage="read-write"/>
+			<key column="parent_id"/>
+			<one-to-many class="Depart"/>
+		</set>
+	</class>
+</hibernate-mapping>

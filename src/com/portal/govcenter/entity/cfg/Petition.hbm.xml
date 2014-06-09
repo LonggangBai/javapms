@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.govcenter.entity">
+	<class name="Petition" table="tq_petition">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="petition_id"><generator class="identity"/></id>
+		<property name="title" column="title" type="string" not-null="true" length="50"/>
+		<property name="name" column="name" type="string" not-null="true" length="20"/>
+		<property name="mobile" column="mobile" type="string" not-null="true" length="20"/>
+		<property name="email" column="email" type="string" not-null="true" length="50"/>
+		<property name="address" column="address" type="string" not-null="false" length="150"/>
+		<property name="zipcode" column="zipcode" type="string" not-null="false" length="20"/>
+		<property name="status" column="status" type="java.lang.Byte" not-null="true" length="5"/>
+		<property name="show" column="is_show" type="java.lang.Boolean" not-null="true"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="replyTime" column="reply_time" type="timestamp" not-null="false" length="19"/>
+		<one-to-one name="ext" class="PetitionExt" cascade="delete"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<many-to-one name="type" column="type_id" class="PetitionType" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

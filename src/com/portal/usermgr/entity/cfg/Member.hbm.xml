@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.usermgr.entity">
+	<class name="Member" table="tq_member">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="member_id">
+			<generator class="foreign"><param name="property">user</param></generator>
+		</id>
+		<property name="avatar" column="avatar" type="string" not-null="false" length="100"/>
+		<property name="gender" column="gender" type="java.lang.Byte" not-null="false" length="5"/>
+		<property name="birthday" column="birthday" type="date" not-null="false" length="19"/>
+		<property name="address" column="address" type="string" not-null="false" length="100"/>
+		<property name="signature" column="signature" type="string" not-null="false" length="255"/>
+		<property name="registerTime" column="registe_time" type="timestamp" not-null="true" length="19"/>
+		<property name="registerIp" column="registe_ip" type="string" not-null="true" length="20"/>
+		<property name="lastLoginTime" column="last_login_time" type="timestamp" not-null="false" length="19"/>
+		<property name="lastLoginIp" column="last_login_ip" type="string" not-null="false" length="20"/>
+		<property name="loginCount" column="login_count" type="integer" not-null="true" length="10"/>
+		<property name="status" column="t_status" type="java.lang.Byte" not-null="true" length="5"/>
+		<one-to-one name="user" class="User" constrained="true"/>
+		<set name="groups" table="tq_member_group">
+			<key column="member_id"/>
+			<many-to-many column="group_id" class="Group"/>
+		</set>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ArticleTxt" table="tq_article_txt">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="article_id">
+			<generator class="foreign"><param name="property">article</param></generator>
+		</id>
+		<property name="txt" column="txt" type="org.springframework.orm.hibernate3.support.ClobStringType" not-null="false"/>
+		<one-to-one name="article" class="Article" constrained="true"/>
+	</class>
+</hibernate-mapping>

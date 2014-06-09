@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class
+		name="WorkFlow"
+		table="tq_work_flow"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="flow_id"><generator class="identity"/></id>
+		<property name="name" column="flow_name" type="java.lang.String" not-null="true" length="50" />
+		<property name="description" column="description" type="java.lang.String" not-null="false" length="200"/>
+		<property name="stepCount" column="step_count" type="java.lang.Integer" not-null="true" length="10"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<set name="flowSteps" inverse="true" cascade="delete" order-by="step asc">
+			<key column="flow_id"/>
+			<one-to-many class="FlowStep"/>
+		</set>
+	</class>
+</hibernate-mapping>

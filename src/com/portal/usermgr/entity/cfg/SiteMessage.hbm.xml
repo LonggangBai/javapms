@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.usermgr.entity">
+	<class
+		name="SiteMessage"
+		table="tq_site_message"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="integer" column="message_id"><generator class="identity"/></id>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="read" column="is_read" type="java.lang.Boolean" not-null="true"/>
+		<property name="deleteFrom" column="is_delete_from" type="java.lang.Boolean" not-null="true"/>
+		<property name="deleteTo" column="is_delete_to" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="ext" class="SiteMessageExt" cascade="delete"/>
+		<many-to-one name="reply" column="reply_id" class="SiteMessage" not-null="false"></many-to-one>
+		<many-to-one name="fromUser" column="from_user" class="User" not-null="false"></many-to-one>
+		<many-to-one name="toUser" column="to_user" class="User" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

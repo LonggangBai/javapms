@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Questionnaire" table="tq_questionnaire">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="naire_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="50"/>
+		<property name="description" column="description" type="string" not-null="false" length="300"/>
+		<property name="repeateTime" column="repeate_time" type="java.lang.Integer" not-null="true" length="10"/>
+		<property name="restrictIp" column="is_restrict_ip" type="java.lang.Boolean" not-null="true"/>
+		<property name="needLogin" column="is_need_login" type="java.lang.Boolean" not-null="true"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="startTime" column="start_time" type="date" not-null="true" length="10"/>
+		<property name="endTime" column="end_time" type="date" not-null="false" length="10"/>
+		<property name="enable" column="enable" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

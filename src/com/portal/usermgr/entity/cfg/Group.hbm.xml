@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.usermgr.entity">
+	<class name="Group" table="tq_group">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="group_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="30"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="11"/>
+		<property name="allPerm" column="is_all_perm" type="java.lang.Boolean" not-null="true"/>
+		<property name="registShow" column="is_regist_show" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="groupPerm" class="GroupPerm" cascade="delete"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="false"></many-to-one>
+		<set name="viewChannels" table="tq_chnl_group_view" inverse="true">
+			<cache usage="read-write"/>
+			<key column="group_id"/>
+			<many-to-many column="channel_id" class="com.portal.doccenter.entity.Channel"/>
+		</set>
+		<set name="contriChannels" table="tq_chnl_group_contri" inverse="true">
+			<cache usage="read-write"/>
+			<key column="group_id"/>
+			<many-to-many column="channel_id" class="com.portal.doccenter.entity.Channel"/>
+		</set>
+	</class>
+</hibernate-mapping>

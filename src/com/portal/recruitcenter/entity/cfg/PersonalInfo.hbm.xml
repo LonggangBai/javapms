@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="PersonalInfo"
+		table="TQ_PERSONAL_INFO"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="personal_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="avatar" column="avatar" type="java.lang.String" not-null="false"/>
+		<property name="realname" column="realname" type="string" not-null="false" length="100"/>
+		<property name="gender" column="gender" type="java.lang.Boolean" not-null="false"/>
+		<property name="birthday" column="birthday" type="timestamp" not-null="false" length="19"/>
+		<property name="educational" column="educational" type="java.lang.Byte" not-null="false"/>
+		<property name="workExp" column="work_exp" type="java.lang.Byte" not-null="true"/>
+		<property name="work" column="is_work" type="java.lang.Boolean" not-null="true"/>
+		<property name="check" column="is_check" type="java.lang.Boolean" not-null="true"/>
+		<property name="commend" column="is_commend" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="ext" class="PersonalInfoExt" cascade="delete"/>
+		<many-to-one name="special" column="special_id" class="com.portal.datacenter.commdata.entity.Specialty" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

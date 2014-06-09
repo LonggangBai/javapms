@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Forum" table="tq_forum">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="forum_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="50"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="themeTotal" column="theme_total" type="integer" not-null="true" length="10"/>
+		<property name="replyTotal" column="reply_total" type="integer" not-null="true" length="10"/>
+		<property name="themeToday" column="theme_today" type="integer" not-null="true" length="10"/>
+		<property name="replyToday" column="reply_today" type="integer" not-null="true" length="10"/>
+		<property name="moderators" column="moderators" type="string" not-null="false" length="50"/>
+		<one-to-one name="ext" class="ForumExt" cascade="delete"/>
+		<many-to-one name="lastTheme" column="last_theme_id" class="Theme" not-null="false"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<many-to-one name="category" column="category_id" class="Category" not-null="true"></many-to-one>
+		<many-to-one name="lastReplyer" column="last_replyer_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

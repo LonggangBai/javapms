@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Comment" table="tq_comment">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="integer" column="comment_id"><generator class="identity"/></id>
+		<property name="ups" column="ups" type="java.lang.Integer" not-null="true" length="5"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<property name="lastTime" column="last_time" type="timestamp" not-null="true" length="19"/>
+		<property name="checked" column="is_checked" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="commentExt" class="CommentExt" cascade="delete"/>
+		<many-to-one name="parent" column="parent_id" class="Comment" not-null="false"></many-to-one>
+		<many-to-one name="doc" column="doc_id" class="com.portal.doccenter.entity.Article" not-null="true"></many-to-one>
+		<many-to-one name="user" column="user_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<set name="child" inverse="true" cascade="delete" order-by="create_time desc">
+			<cache usage="read-write"/>
+			<key column="parent_id"/>
+			<one-to-many class="Comment"/>
+		</set>
+	</class>
+</hibernate-mapping>

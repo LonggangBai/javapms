@@ -1,0 +1,59 @@
+[#assign p=page/]
+[#if p.totalPage gt 1]
+<div class="pmsPage">
+<a [#if !p.firstPage]href="ajaxhref(${p.prePage})"[/#if] [#if p.firstPage]class="disabled"[/#if]>&lt; 上一页</a>
+[#if p.totalPage gt 7]
+
+
+[#if (p.pageNo gt 5) && (p.pageNo lt p.totalPage-2)]
+<a [#if p.pageNo==1]class="current"[#else]href="ajaxhref(1)"[/#if]>1</a>
+<a [#if p.pageNo==2]class="current"[#else]href="ajaxhref(2)"[/#if]>2</a>
+...
+[#list p.pageNo-2..p.pageNo as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+[#elseif p.pageNo gt p.totalPage-3]
+<a [#if p.pageNo==1]class="current"[#else]href="ajaxhref(1)"[/#if]>1</a>
+<a [#if p.pageNo==2]class="current"[#else]href="ajaxhref(2)"[/#if]>2</a>
+...
+[#list p.totalPage-4..p.pageNo as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+[#else]
+[#list 1..p.pageNo as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+[/#if]
+
+
+[#if (p.pageNo gt 3) && (p.pageNo lt p.totalPage-4)]
+[#list p.pageNo+1..p.pageNo+2 as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+...
+<a [#if p.pageNo==p.totalPage-1]class="current"[#else]href="ajaxhref(${p.totalPage-1})"[/#if]>${p.totalPage-1}</a>
+<a [#if p.pageNo==p.totalPage]class="current"[#else]href="ajaxhref(${p.totalPage})"[/#if]>${p.totalPage}</a>
+[#elseif p.pageNo lt 4]
+[#list p.pageNo+1..5 as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+...
+<a [#if p.pageNo==p.totalPage-1]class="current"[#else]href="ajaxhref(${p.totalPage-1})"[/#if]>${p.totalPage-1}</a>
+<a [#if p.pageNo==p.totalPage]class="current"[#else]href="ajaxhref(${p.totalPage})"[/#if]>${p.totalPage}</a>
+[#else]
+[#if p.totalPage gt p.pageNo]
+[#list p.pageNo+1..p.totalPage as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+[/#if]
+[/#if]
+
+
+[#else]
+[#list 1..p.totalPage as i]
+<a [#if i==p.pageNo]class="current"[#else]href="ajaxhref(${i})"[/#if]>${i}</a>
+[/#list]
+[/#if]
+<a [#if !p.lastPage]href="ajaxhref(${p.nextPage})"[/#if] [#if p.lastPage]class="disabled"[/#if]>下一页 &gt;</a>
+</div>
+[/#if]

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="Train"
+		table="TQ_TRAIN"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="train_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="startTime" column="start_time" type="string" not-null="true" length="30"/>
+		<property name="endTime" column="end_time" type="string" not-null="true" length="30"/>
+		<property name="training" column="training" type="string" not-null="true" length="50"/>
+		<property name="trainCourse" column="train_course" type="string" not-null="true" length="50"/>
+		<property name="certName" column="cert_name" type="string" not-null="true" length="20"/>
+		<property name="description" column="description" type="string" not-null="false"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="resume" column="resume_id" class="Resume" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ChannelExt" table="tq_channel_ext">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="channel_id">
+			<generator class="foreign"><param name="property">channel</param></generator>
+		</id>
+		<property name="link" column="link" type="string" not-null="false" length="150"/>
+		<property name="tplChannel" column="tpl_channel" type="string" not-null="false" length="100"/>
+		<property name="commentControl" column="comment_control" type="java.lang.Boolean" not-null="true" length="10"/>
+		<property name="updownControl" column="updown_control" type="java.lang.Boolean" not-null="false"/>
+		<property name="blank" column="is_blank" type="java.lang.Boolean" not-null="true"/>
+		<property name="title" column="title" type="string" not-null="false" length="100"/>
+		<property name="keywords" column="keywords" type="string" not-null="false" length="100"/>
+		<property name="description" column="description" type="string" not-null="false" length="255"/>
+		<one-to-one name="channel" class="Channel" constrained="true"/>
+	</class>
+</hibernate-mapping>

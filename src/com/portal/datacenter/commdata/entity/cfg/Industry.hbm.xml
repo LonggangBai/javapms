@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.datacenter.commdata.entity">
+	<class
+		name="Industry"
+		table="TQ_INDUSTRY"
+	>
+		<meta attribute="sync-DAO">false</meta>
+
+		<id
+			name="id"
+			type="integer"
+			column="industry_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property
+			name="code"
+			column="industry_code"
+			type="java.lang.String"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="name"
+			column="industry_name"
+			type="java.lang.String"
+			not-null="true"
+			length="50"
+		/>
+		<many-to-one name="parent" column="parent_id" class="Industry" not-null="false"></many-to-one>
+	</class>	
+</hibernate-mapping>

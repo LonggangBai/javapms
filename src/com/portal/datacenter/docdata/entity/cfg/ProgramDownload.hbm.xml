@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.datacenter.docdata.entity">
+	<class name="ProgramDownload" table="tq_program_download">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="integer" column="download_id"><generator class="identity"/></id>
+		<property name="count" column="count" type="java.lang.Integer" not-null="true" length="11"/>
+	</class>
+</hibernate-mapping>

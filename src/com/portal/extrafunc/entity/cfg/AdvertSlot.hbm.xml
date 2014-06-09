@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="AdvertSlot" table="tq_advert_slot">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="slot_id"><generator class="identity"/></id>
+		<property name="name" column="name" type="string" not-null="true" length="30"/>
+		<property name="slotType" column="slot_type" type="java.lang.Short" not-null="true" length="5"/>
+		<property name="height" column="height" type="integer" not-null="false" length="10"/>
+		<property name="width" column="width" type="integer" not-null="false" length="10"/>
+		<property name="remain" column="remain" type="integer" not-null="false" length="10"/>
+		<property name="scrollbar" column="scrollbar" type="java.lang.Boolean" not-null="false"/>
+		<property name="sexplain" column="sexplain" type="string" not-null="false"/>
+		<property name="idleholder" column="idleholder" type="java.lang.Boolean" not-null="false"/>
+		<property name="rotation" column="rotation" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+	</class>
+</hibernate-mapping>

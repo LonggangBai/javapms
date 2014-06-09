@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.usermgr.entity">
+	<class name="Admin" table="tq_admin">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="admin_id">
+			<generator class="foreign"><param name="property">user</param></generator>
+		</id>
+		<property name="registerTime" column="registe_time" type="timestamp" not-null="true" length="19"/>
+		<property name="registerIp" column="registe_ip" type="string" not-null="true" length="20"/>
+		<property name="lastLoginTime" column="last_login_time" type="timestamp" not-null="false" length="19"/>
+		<property name="lastLoginIp" column="last_login_ip" type="string" not-null="false" length="20"/>
+		<property name="loginCount" column="login_count" type="integer" not-null="true" length="10"/>
+		<property name="status" column="t_status" type="java.lang.Byte" not-null="true" length="5"/>
+		<one-to-one name="user" class="User" constrained="true"/>
+		<set name="adminChecks" inverse="true" cascade="delete">
+			<key column="admin_id"/>
+			<one-to-many class="AdminCheck"/>
+		</set>
+		<set name="roles" table="tq_admin_role">
+			<key column="admin_id"/>
+			<many-to-many column="role_id" class="Role"/>
+		</set>
+		<set name="departs" table="tq_admin_depart">
+			<key column="admin_id"/>
+			<many-to-many column="depart_id" class="Depart"/>
+		</set>
+	</class>
+</hibernate-mapping>

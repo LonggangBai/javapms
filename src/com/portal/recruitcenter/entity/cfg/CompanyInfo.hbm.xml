@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="CompanyInfo"
+		table="TQ_COMPANY_INFO"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id
+			name="id"
+			type="integer"
+			column="company_id"
+		>
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="name" type="java.lang.String" not-null="true" length="80"/>
+		<property name="linkMan" column="link_man" type="java.lang.String" not-null="true" length="50"/>
+		<property name="linkTel" column="link_tel" type="java.lang.String" not-null="true" length="50"/>
+		<property name="comScale" column="com_scale" type="java.lang.Byte" not-null="false"/>
+		<property name="lastPostTime" column="last_post_time" type="timestamp" not-null="false" length="19"/>
+		<property name="check" column="is_check" type="java.lang.Boolean" not-null="true"/>
+		<property name="commend" column="is_commend" type="java.lang.Boolean" not-null="true"/>
+		<property name="show" column="is_show" type="java.lang.Boolean" not-null="true"/>
+		<property name="postCount" type="java.lang.Integer" formula="(select count(p.job_id) from TQ_JOB_POST p where p.company_id=company_id)" length="19"/>
+		<one-to-one name="ext" class="CompanyInfoExt" cascade="delete"/>
+		<many-to-one name="nature" column="com_nature" class="com.portal.datacenter.commdata.entity.EconomyType" not-null="false"></many-to-one>
+		<many-to-one name="industry1" column="com_industry1" class="com.portal.datacenter.commdata.entity.Industry" not-null="false"></many-to-one>
+		<many-to-one name="industry2" column="com_industry2" class="com.portal.datacenter.commdata.entity.Industry" not-null="false"></many-to-one>
+		<many-to-one name="vipType" column="vip_type" class="VipType" not-null="false"></many-to-one>
+		<many-to-one name="applyType" column="apply_type" class="VipType" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

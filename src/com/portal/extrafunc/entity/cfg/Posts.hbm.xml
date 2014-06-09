@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="Posts" table="tq_posts">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="integer" column="posts_id"><generator class="identity"/></id>
+		<property name="title" column="title" type="string" not-null="false" length="100"/>
+		<property name="status" column="status" type="integer" not-null="true" length="10"/>
+		<property name="affix" column="is_affix" type="java.lang.Boolean" not-null="true"/>
+		<property name="img" column="is_img" type="java.lang.Boolean" not-null="true"/>
+		<property name="hidden" column="is_hidden" type="java.lang.Boolean" not-null="true"/>
+		<property name="floor" column="floor" type="java.lang.Integer" not-null="true"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<one-to-one name="ext" class="PostsExt" cascade="delete"/>
+		<one-to-one name="txt" class="PostsTxt" cascade="delete"/>
+		<many-to-one name="theme" column="theme_id" class="Theme" not-null="true"></many-to-one>
+		<many-to-one name="quote" column="quote_id" class="Posts" not-null="false"></many-to-one>
+		<many-to-one name="creater" column="creater_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+		<many-to-one name="site" column="site_id" class="com.portal.sysmgr.entity.Site" not-null="true"></many-to-one>
+		<list name="attachs" table="tq_posts_attach" cascade="delete">
+			<cache usage="read-write"/>
+			<key column="posts_id"/>
+			<list-index column="priority"/>
+			<composite-element class="PostsAttach">
+				<property name="name" column="name" type="string" not-null="false" length="100"/>
+				<property name="description" column="description" type="string" not-null="false" length="255"/>
+				<property name="filePath" column="file_path" type="string" not-null="true" length="100"/>
+				<property name="fileName" column="file_name" type="string" not-null="false" length="50"/>
+				<property name="fileSize" column="file_size" type="java.lang.Integer" not-null="false" length="10"/>
+				<property name="img" column="is_img" type="java.lang.Boolean" not-null="true"/>
+			</composite-element>
+		</list>
+	</class>
+</hibernate-mapping>

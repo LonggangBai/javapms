@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="DocStatis" table="tq_doc_statistics">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="doc_id">
+			<generator class="foreign"><param name="property">doc</param></generator>
+		</id>
+		<property name="viewsCount" column="views_count" type="java.lang.Integer" not-null="true" length="19"/>
+		<property name="commentCount" column="comment_count" type="java.lang.Integer" not-null="true" length="19" />
+		<one-to-one name="doc" class="Article" constrained="true"/>
+	</class>
+</hibernate-mapping>

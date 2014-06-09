@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+/* Elements
+----------------------------------------*/
+body{margin:0;padding:0;}
+body,html{font:12px/1.5 arial;color:#ffffff;background:#0d8dd8;}
+input[type=text],input[type=password]{width:150px;height:20px;line-height:20px;border:1px solid #D4D0C8; color:#090;}
+input[type=text]:focus,input[type=password]:focus{border:1px solid #FF0;}
+.ubg{background:url(../img/login/ubg.jpg) top left no-repeat;text-indent:25px;}
+.pbg{background:url(../img/login/pbg.jpg) top left no-repeat;text-indent:25px;}
+.cbg{background:url(../img/login/cbg.jpg) top left no-repeat;text-indent:25px;}

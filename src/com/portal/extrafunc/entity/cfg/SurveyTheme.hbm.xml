@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="SurveyTheme" table="tq_survey_theme">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="theme_id"><generator class="identity"/></id>
+		<property name="title" column="title" type="string" not-null="true" length="50"/>
+		<property name="surveyType" column="survey_type" type="java.lang.Integer" not-null="true" length="10"/>
+		<property name="totalCount" column="total_count" type="java.lang.Integer" not-null="false" length="10"/>
+		<property name="maxlength" column="maxlength" type="java.lang.Integer" not-null="false" length="10"/>
+		<property name="showType" column="show_type" type="java.lang.Integer" not-null="false" length="10"/>
+		<property name="priority" column="priority" type="java.lang.Integer" not-null="true" length="10"/>
+		<many-to-one name="naire" column="naire_id" class="Questionnaire" not-null="true"></many-to-one>
+		<set name="items" table="tq_survey_item" cascade="delete" order-by="priority asc">
+			<cache usage="read-write"/>
+			<key column="theme_id"/>
+			<composite-element class="SurveyItem">
+				<property name="name" column="name" type="string" not-null="true" length="50"/>
+				<property name="votes" column="votes" type="java.lang.Integer" not-null="true" length="10"/>
+				<property name="priority" column="priority" type="java.lang.Integer" not-null="true" length="10"/>
+			</composite-element>
+		</set>
+	</class>
+</hibernate-mapping>

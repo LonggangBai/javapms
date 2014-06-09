@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.sysmgr.entity">
+	<class name="Site" table="tq_site">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="site_id"><generator class="identity"/></id>
+		<property name="domain" column="domain" type="string" not-null="true" length="50"/>
+		<property name="path" column="site_path" type="string" not-null="true" length="20"/>
+		<property name="name" column="site_name" type="string" not-null="true" length="100"/>
+		<property name="shortName" column="short_name" type="string" not-null="false" length="100"/>
+		<property name="contextPath" column="context_path" type="string" not-null="false" length="20"/>
+		<property name="port" column="port" type="integer" not-null="false" length="10"/>
+		<property name="tplStyle" column="tpl_style" type="string" not-null="true" length="50"/>
+		<property name="title" column="title" type="string" not-null="false" length="80"/>
+		<property name="keywords" column="keywords" type="string" not-null="false" length="100"/>
+		<property name="description" column="description" type="string" not-null="false" length="255"/>
+		<property name="recover" column="is_recover" type="java.lang.Boolean" not-null="true"/>
+		<one-to-one name="forumStatis" class="com.portal.extrafunc.entity.ForumStatis" cascade="delete"/>
+	</class>
+</hibernate-mapping>

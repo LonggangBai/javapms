@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.portal.doccenter.entity">
+	<class name="ArticleExt" table="tq_article_ext">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="article_id">
+			<generator class="foreign"><param name="property">article</param></generator>
+		</id>
+		<property name="subTitle" column="sub_title" type="string" not-null="false" length="100" />
+		<property name="author" column="author" type="string" not-null="false" length="30" />
+		<property name="origin" column="origin" type="string" not-null="false" length="50" />
+		<property name="tagStr" column="tag_str" type="string" not-null="false" length="50" />
+		<property name="originUrl" column="origin_url" type="string" not-null="false" length="50" />
+		<property name="showIndex" column="show_index" type="java.lang.Boolean" not-null="false"/>
+		<property name="redTape" column="is_red_tape" type="java.lang.Boolean" not-null="true"/>
+		<property name="redtapeOrigin" column="red_tape_origin" type="string" not-null="false" length="100"/>
+		<property name="description" column="description" type="string" not-null="false" length="255" />
+		<property name="tplContent" column="tpl_content" type="string" not-null="false" length="100" />
+		<property name="link" column="link" type="string" not-null="false" length="100"/>
+		<property name="commentControl" column="comment_control" type="java.lang.Boolean" not-null="false" length="5" />
+		<property name="updownControl" column="updown_control" type="java.lang.Boolean" not-null="false"/>
+		<property name="timeDay" column="time_day" type="date" not-null="false"/>
+		<property name="timeHour" column="time_hour" type="time" not-null="false"/>
+		<one-to-one name="article" class="Article" constrained="true"/>
+	</class>
+</hibernate-mapping>

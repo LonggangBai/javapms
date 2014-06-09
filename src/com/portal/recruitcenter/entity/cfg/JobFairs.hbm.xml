@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.portal.recruitcenter.entity">
+	<class
+		name="JobFairs"
+		table="TQ_JOB_FAIRS"
+	>
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="fairs_id">
+			<generator class="identity"/>
+		</id>
+		<property name="name" column="fairs_name" type="string" not-null="true" length="50"/>
+		<property name="theme" column="fairs_theme" type="string" not-null="true" length="100"/>
+		<property name="startTime" column="start_time" type="date" not-null="true" length="19"/>
+		<property name="endTime" column="end_time" type="date" not-null="false" length="19"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<one-to-one name="ext" class="JobFairsExt" cascade="delete"/>
+	</class>	
+</hibernate-mapping>

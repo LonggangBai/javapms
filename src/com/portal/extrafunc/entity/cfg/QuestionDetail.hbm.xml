@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.portal.extrafunc.entity">
+	<class name="QuestionDetail" table="tq_question_detail">
+		<meta attribute="sync-DAO">false</meta>
+		<id name="id" type="java.lang.Integer" column="detail_id"><generator class="identity"/></id>
+		<property name="ip" column="ip" type="string" not-null="true" length="50"/>
+		<property name="createTime" column="create_time" type="timestamp" not-null="true" length="19"/>
+		<many-to-one name="question" column="question_id" class="Questionnaire" not-null="true"></many-to-one>
+		<many-to-one name="user" column="user_id" class="com.portal.usermgr.entity.User" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>
